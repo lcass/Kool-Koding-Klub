@@ -180,6 +180,18 @@ public class renderer {//render objects are handled entirely inside the renderer
 		graphics.edit_buffer_index(buffer_id,index*12,render_to_array(render_objects[index]));
 	}
 	/**
+	 * translate an object without updating the screen.
+	 * @param index
+	 * @param position
+	 */
+	public void translate_object_static(int index, Vertex2d position) {
+		if(index == -1) {
+			return;
+		}
+		render_objects[index].position = position;
+		graphics.edit_buffer_index_static(buffer_id, index*12, render_to_array(render_objects[index]));
+	}
+	/**
 	 * updates the stored render list but does not update the GPU memory or current screen data , once all objects have been placed call rebuild_buffer()
 	 * @param index the id of the data
 	 * @param position the pixel coordinate of the data
