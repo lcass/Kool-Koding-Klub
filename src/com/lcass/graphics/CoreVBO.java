@@ -51,8 +51,6 @@ public class CoreVBO {
 		particle_shader_class.unbind();
 	}
 	public void dispose(){
-		particle_shader_class.dispose();
-		line_shader_class.dispose();
 		shaderclass.dispose();
 	}
 	public void set_fps(int fps){
