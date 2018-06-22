@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 
 import org.lwjgl.glfw.GLFW;
 
+import com.lcass.game.Game;
 import com.lcass.graphics.Graphics_handler;
 import com.lcass.graphics.Vertex2d;
 import com.lcass.graphics.core_util;
@@ -44,7 +45,8 @@ public class Core{
 		//bind graphics handler tick
 		Method render = util.obtain_method(graphics.getClass(), "render");
 		util.bind_render_function(render, graphics);
-		
+		//Create Game
+		new Game(this);
 		//int texture
 		//setup background
 		//do the top layers*/

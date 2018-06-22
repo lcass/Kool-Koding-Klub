@@ -112,6 +112,7 @@ public class core_util {
 		outputs.clear();
 		
 	}
+	
 
 	private void tick() {
 		for (int i = 0; i < methods.size(); i++) {

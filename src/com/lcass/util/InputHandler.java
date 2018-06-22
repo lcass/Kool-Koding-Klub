@@ -13,7 +13,7 @@ import static org.lwjgl.glfw.Callbacks.*;
 public class InputHandler {
 
 	public boolean a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t,
-			u, v, w, x, y, z,lbrack,rbrack, shift, control,left, right, up, down, mouse1, mouse2, mouse3,esc;
+			u, v, w, x, y, z,space,lbrack,rbrack, shift, control,left, right, up, down, mouse1, mouse2, mouse3,esc;
 	// value
 
 	private PointerInfo mouse;
@@ -46,6 +46,7 @@ public class InputHandler {
 		q = GLFW.glfwGetKey(core.window, GLFW.GLFW_KEY_Q) == 1;
 		r = GLFW.glfwGetKey(core.window, GLFW.GLFW_KEY_R) == 1;
 		l = GLFW.glfwGetKey(core.window, GLFW.GLFW_KEY_L) == 1;
+		space = GLFW.glfwGetKey(core.window, GLFW.GLFW_KEY_SPACE)==1;
 		lbrack = GLFW.glfwGetKey(core.window, GLFW.GLFW_KEY_LEFT_BRACKET) == 1;
 		rbrack = GLFW.glfwGetKey(core.window,GLFW.GLFW_KEY_RIGHT_BRACKET) == 1;
 		shift = GLFW.glfwGetKey(core.window, GLFW.GLFW_KEY_LEFT_SHIFT) == 1;

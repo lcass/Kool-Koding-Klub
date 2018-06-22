@@ -14,6 +14,9 @@ public class Vertex2d {//2d for texture and for vert coords
 		this.u = u;
 		this.v = v;
 	}
+	public Vertex2d() {
+		x = y = u = v = 0;
+	}
 	
 	
 	
