@@ -103,6 +103,26 @@ public class renderer {//render objects are handled entirely inside the renderer
 		
 	}
 	/**
+	 * Create a new render object , set custom to true if this is a custom sprite
+	 * @param position the position of it
+	 * @param sprite the sprite of the data
+	 * @return the index of the newly created object
+	 */
+	public int create_object_static(Vertex2d position , Vertex2d sprite,boolean custom){//get(0) was causing issues , couldn't decide if it was a position or value so it would reassign new data to those indecies.
+		if(free_objects.size() >0){
+			int index = free_objects.get(0);
+			free_objects.remove(0);
+			edit_object(index,position,sprite,custom);
+			return index;
+		}
+		int index = objects_used;
+		render_objects[index] = new render_object(position.whole(),sprite.whole(),custom);
+		graphics.extend_buffer_static(buffer_id, render_to_array(render_objects[index]));
+		objects_used++;
+		return index;
+		
+	}
+	/**
 	 * Create a new object with a square sprite of default 32 x 32 size.
 	 * @param position
 	 * @param sprite
@@ -111,7 +131,15 @@ public class renderer {//render objects are handled entirely inside the renderer
 	public int create_object(Vertex2d position , Vertex2d sprite){
 		return create_object(position,sprite,false);
 	}
-
+	/**
+	 * Same as create_object() but doesn't update the screen buffer.
+	 * @param position
+	 * @param sprite
+	 * @return
+	 */
+	public int create_object_static(Vertex2d position, Vertex2d sprite) {
+		return create_object_static(position,sprite,false);
+	}
 	/**
 	 * update the stored render list and updates the screen data , should not be called with rebuild_buffer();
 	 * @param index the index id of the data

@@ -4,8 +4,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL15;
 
 import com.lcass.core.Core;
 import com.lcass.graphics.texture.spritecomponent;
@@ -374,5 +372,11 @@ public class core_util {
 		float mid_x = Math.min(a.x, b.x) - Math.max(a.x, a.x);
 		float mid_y = Math.min(a.y, b.y) - Math.max(b.y, b.y);
 		return new Vertex2d(a.x + (mid_x/2),a.y + (mid_y/1));
+	}
+	public boolean on_screen(Vertex2d pos) {
+		if(pos.x <= width && pos.x >= 0 && pos.y <= height && pos.y >= 0) {
+			return true;
+		}
+		return false;
 	}
 }

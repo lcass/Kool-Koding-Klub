@@ -41,11 +41,22 @@ public class Ship {
 			fire();
 		}
 	}
+	/**
+	 * Accelerates by the given vector.
+	 * @param accel
+	 */
+	public void accelerate(Vertex2d accel) {
+		acceleration.add(accel);
+	}
 	public void fire() {//remember to implement a delay here.
 		
 	}
+	/**
+	 * returns a copy of position
+	 * @return
+	 */
 	public Vertex2d get_position() {
-		return position;
+		return position.whole();
 	}
 	
 }
