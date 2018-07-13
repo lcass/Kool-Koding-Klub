@@ -37,15 +37,15 @@ public class Asteroid_Handler extends Thread{
 		//We cant remove elements of asteroids while reading it so build a delete queue instead.
 		ArrayList<Asteroid> delete_queue = new ArrayList<Asteroid>();
 		for(Asteroid a:asteroids) {
-			if(!game.core.util.on_screen(a.position)) {//don't process asteroids we can't see thats just mean.
+			if(!game.core.util.on_screen(a.position)) {//don't process asteroids we can't see thats just mean. This might have to change as otherwise there might be sudden jumps when asteroids leave screen
 				delete_queue.add(a);
 				continue;
 			}
 			//Compute gravity
 			Vertex2d delta = a.position.sub(game.ship.get_position());//Delta in position.
-			float dist = delta.x * delta.x + delta.y * delta.y;//calc r^2
-			delta.div((float)Math.sqrt(dist)).div(dist).mult(gravity_strength*a.mass);//convert to unit vector then apply gravity
-			game.ship.accelerate(delta);
+			float dist_to_asteroid = delta.x * delta.x + delta.y * delta.y;//calc r^2
+			delta.div((float)Math.sqrt(dist_to_asteroid)).div(dist_to_asteroid).mult(gravity_strength*a.mass);//convert to unit vector then apply gravity
+			game.ship.accelerate(delta);//seems inefficient computing movement for each force, why not calc resultant for all asteroids and then move
 			a.move();
 			//update the locations of the asteroids on the screen.
 			renderer.edit_object_static(a.render_id, a.get_position(), a.sprite);
