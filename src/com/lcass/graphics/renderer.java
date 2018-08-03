@@ -20,6 +20,7 @@ public class renderer {//render objects are handled entirely inside the renderer
 	private int objects_used = 0;
 	private Util util;
 	private static final int OVERLAY_MAX = 10000;
+	private int overlay_number = OVERLAY_MAX;
 	/**
 	 * the GUI init version , requires init() to be called afterwards in order to create the other objects
 	 * @param core
@@ -55,6 +56,20 @@ public class renderer {//render objects are handled entirely inside the renderer
 		buffer_id = graphics.create_buffer(OVERLAY_MAX, overlay_sprite_data.gettexture());
 		util = new Util();
 		//add to core.tick hence no tick call is required in the method.
+	}
+	/**
+	 * Load with a custom amount of render objects instead of the standard maximum.
+	 * @param core world core.
+	 * @param max_render_objects max number of render objects.
+	 */
+	public renderer(Core core, int max_render_objects) {
+		this.core = core;
+		position = new Vertex2d();
+		this.graphics = core.graphics;
+		render_objects = new render_object[max_render_objects];
+		buffer_id = graphics.create_buffer(max_render_objects,overlay_sprite_data.gettexture());
+		util = new Util();
+		overlay_number = max_render_objects;
 	}
 	public void set_render(boolean render){
 		graphics.set_render(buffer_id, render);
@@ -96,6 +111,7 @@ public class renderer {//render objects are handled entirely inside the renderer
 			return index;
 		}
 		int index = objects_used;
+		
 		render_objects[index] = new render_object(position.whole(),sprite.whole(),custom);
 		graphics.extend_buffer(buffer_id, render_to_array(render_objects[index]));
 		objects_used++;
@@ -113,7 +129,9 @@ public class renderer {//render objects are handled entirely inside the renderer
 			int index = free_objects.get(0);
 			free_objects.remove(0);
 			edit_object(index,position,sprite,custom);
+			
 			return index;
+			
 		}
 		int index = objects_used;
 		render_objects[index] = new render_object(position.whole(),sprite.whole(),custom);
@@ -264,7 +282,7 @@ public class renderer {//render objects are handled entirely inside the renderer
 	 */
 	public void rebuild_buffer(){
 		graphics.clear_buffer(buffer_id);
-		for(int i = 0; i < OVERLAY_MAX;i++){
+		for(int i = 0; i < overlay_number;i++){
 			if(render_objects[i] == null){
 				continue;
 			}

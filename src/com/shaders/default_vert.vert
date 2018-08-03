@@ -51,14 +51,7 @@ void main(){
    temp+=vec2(rotpos_2.x*2.0,rotpos_2.y*2.0);
    offset = convertto(temp);
    }
-   if(rot_attrib.z != 0.0){
-   mat2 rotmat = mat2(cos(rot_attrib.z),-sin(rot_attrib.z),sin(rot_attrib.z),cos(rot_attrib.z));
-   vec2 temp = convertback(offset);
-   temp-=vec2(rot_attrib.x*2.0,rot_attrib.y*2.0);
-   temp*=rotmat;
-   temp+=vec2(rot_attrib.x*2.0,rot_attrib.y*2.0);
-   offset = convertto(temp);
-   }
+  
    
   offset+=transform;
    gl_Position = vec4(offset,1,1);

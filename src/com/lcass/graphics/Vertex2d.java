@@ -87,5 +87,6 @@ public class Vertex2d {//2d for texture and for vert coords
 	public double get_magnitude(){
 		return Math.sqrt(x*x + y * y);
 	}
+
 	
 }

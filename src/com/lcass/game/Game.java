@@ -10,41 +10,19 @@ import com.lcass.util.InputHandler;
  */
 public class Game {//currently just implements basic user input , ticks. 
 	public Core core;
+	public static final int TILE_SIZE = 32;//size of a tile in pixel
+	public static final int WORLD_SIZE = 32;//size of the world in floor.
 	private InputHandler input;
-	public Ship ship;
-	public Asteroid_Handler asteroids;
-	//EG
-	/**
-	 * This is the Game constructor
-	 * @param core pass in a core object.
-	 */
+	private Planet planet;
 	public Game(Core core) {
 		this.core = core;
 		input = new InputHandler(core);
-		ship = new Ship(this);
+		
 		core.util.bind_function(core.util.obtain_method(Game.class, "tick"), this);//Add the tick function to main gameloop
-		asteroids = new Asteroid_Handler(this);
-		asteroids.add_asteroid(new Vertex2d(), 1);
-		asteroids.start();
-		try {
-			asteroids.wait();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		planet = new Planet(this);//planet should handle all objects, everything relating to player input goes outside of it.
 	}
-	public void tick() {
-		asteroids.notify();
+	public void tick() {	
 		input.tick();
-		ship.input(input.w, input.space, input.obtain_mouse());
-		ship.tick();
-		if(!asteroids.finished()) {//need to wait for the asteroids to finish processing.
-			try {
-				this.wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		planet.tick();
 	}
 }
